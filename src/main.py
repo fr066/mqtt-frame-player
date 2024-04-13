@@ -40,20 +40,20 @@ class JSONViewerApp:
                 frames_to_file = []
                 
                 transposed = []
-                fcount = 0
+                
                 #print(data["workitems"][0]["attributes"]["angle"]["value"])
             for workitem in data["workitems"]:
-             
+                fcount = 0
                 angles = workitem["attributes"]["angle"]["value"]
                 fangles = []
                 #print(angles)
                 for ang in angles:
-                    fangles.append( int(round(ang,0)))
+                    fangles.append( int(round(ang)))
                     fcount = fcount + 1
-                
-                
-            print(frames)    
-            for i in range(11):
+                frames.append(fangles)
+
+            #print(frames)    
+            for i in range(fcount):
                 # the following 3 lines implement the nested listcomp
                 transposed_row = []
                 for row in frames:
@@ -69,7 +69,7 @@ class JSONViewerApp:
             for fang in transposed:
                 self.text_widget.insert(tk.END, {"type":"frame","frame": index,"angles": fang } )
                 self.text_widget.insert(tk.END,"\n")
-                frames_to_file.append({"type":"frame","frame": index,"angles": fang })
+                #frames_to_file.append({"type":"frame","frame": index,"angles": fang })
                 raw_data.append({"type":"frame","frame": index,"angles": fang})
                 index = index + 1
             # Format JSON data as a string and display it in the Text widget
